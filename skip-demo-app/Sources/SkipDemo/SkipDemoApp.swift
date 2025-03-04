@@ -2,7 +2,7 @@ import Foundation
 import OSLog
 import SwiftUI
 
-fileprivate let logger: Logger = Logger(subsystem: "com.nicolocurioni.skip-diary", category: "SkipDiaryDemo")
+fileprivate let logger: Logger = Logger(subsystem: "com.nicolocurioni.skip-demo-app", category: "SkipDemo")
 
 /// The Android SDK number we are running against, or `nil` if not running on Android
 let androidSDK = ProcessInfo.processInfo.environment["android.os.Build.VERSION.SDK_INT"].flatMap({ Int($0) })
@@ -10,8 +10,8 @@ let androidSDK = ProcessInfo.processInfo.environment["android.os.Build.VERSION.S
 /// The shared top-level view for the app, loaded from the platform-specific App delegates below.
 ///
 /// The default implementation merely loads the `ContentView` for the app and logs a message.
-public struct SkipDiaryDemoRootView : View {
-    @ObservedObject var appDelegate = SkipDiaryDemoAppDelegate.shared
+public struct SkipDemoRootView : View {
+    @ObservedObject var appDelegate = SkipDemoAppDelegate.shared
 
     public init() {
     }
@@ -19,8 +19,8 @@ public struct SkipDiaryDemoRootView : View {
     public var body: some View {
         ContentView()
             .task {
-                logger.info("Welcome to SkipDiary Demo on \(androidSDK != nil ? "Android" : "Darwin")!")
-                logger.info("SkipDiary Demo app logs are viewable in the Xcode console for iOS; Android logs can be viewed in Studio or using adb logcat")
+                logger.info("Welcome to Skip on \(androidSDK != nil ? "Android" : "Darwin")!")
+                logger.info("Skip app logs are viewable in the Xcode console for iOS; Android logs can be viewed in Studio or using adb logcat")
             }
     }
 }
@@ -29,8 +29,8 @@ public struct SkipDiaryDemoRootView : View {
 ///
 /// This functions can update a shared observable object to communicate app state changes to interested views.
 /// The sender for each of these functions will be either a `UIApplication` (iOS) or `AppCompatActivity` (Android)
-public class SkipDiaryDemoAppDelegate: ObservableObject {
-    public static let shared = SkipDiaryDemoAppDelegate()
+public class SkipDemoAppDelegate: ObservableObject {
+    public static let shared = SkipDemoAppDelegate()
 
     private init() {
     }

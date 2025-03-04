@@ -1,18 +1,25 @@
 import SwiftUI
 
 enum ContentTab: String, Hashable {
-    case home, settings
+    case welcome, home, settings
 }
 
 struct ContentView: View {
-    @AppStorage("tab") var tab = ContentTab.home
+    @AppStorage("tab") var tab = ContentTab.welcome
     @State var viewModel = ViewModel()
     @State var appearance = ""
 
     var body: some View {
         TabView(selection: $tab) {
             NavigationStack {
-                HomeView()
+                WelcomeView()
+            }
+            .tabItem { Label("Welcome", systemImage: "heart.fill") }
+            .tag(ContentTab.welcome)
+
+            NavigationStack {
+                ItemListView()
+                    .navigationTitle(Text("\(viewModel.items.count) Items"))
             }
             .tabItem { Label("Home", systemImage: "house.fill") }
             .tag(ContentTab.home)
@@ -29,36 +36,22 @@ struct ContentView: View {
     }
 }
 
-struct HomeView : View {
-    @State var showAddSheet: Bool = false
+struct WelcomeView : View {
+    @State var heartBeating = false
     @Environment(ViewModel.self) var viewModel: ViewModel
 
     var body: some View {
-        NavigationStack {
-            List {
-                ForEach(viewModel.items) { item in
-                    Label {
-                        Text(item.itemTitle)
-                    } icon: {
-                        if item.favorite {
-                            Image(systemName: "star.fill")
-                                .foregroundStyle(.yellow)
-                        }
-                    }
-                }
-            }
+        @Bindable var viewModel = viewModel
+        VStack(spacing: 0) {
+            Text("Hello [\(viewModel.name)](https://skip.tools)!")
+                .padding()
+            Image(systemName: "heart.fill")
+                .foregroundStyle(.red)
+                .scaleEffect(heartBeating ? 1.5 : 1.0)
+                .animation(.easeInOut(duration: 1).repeatForever(), value: heartBeating)
+                .onAppear { heartBeating = true }
         }
         .font(.largeTitle)
-        .navigationTitle("SkipDiary Demo")
-        .toolbar {
-            ToolbarItemGroup {
-                Button {
-                    
-                } label: {
-                    Label("Add", systemImage: "plus")
-                }
-            }
-        }
     }
 }
 
