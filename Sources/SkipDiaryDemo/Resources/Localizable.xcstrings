@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Add" : {
+
+    },
     "Appearance" : {
       "localizations" : {
         "es" : {
@@ -28,6 +31,9 @@
           }
         }
       }
+    },
+    "Cancel" : {
+
     },
     "Dark" : {
       "localizations" : {
@@ -57,7 +63,14 @@
         }
       }
     },
+    "Date" : {
+
+    },
+    "Favorite" : {
+
+    },
     "Hello [%@](https://skip.tools)!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -169,7 +182,14 @@
         }
       }
     },
+    "Notes" : {
+
+    },
+    "Powered by [Skip](https://skip.tools)" : {
+
+    },
     "Powered by Skip and %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -196,6 +216,9 @@
           }
         }
       }
+    },
+    "Save" : {
+
     },
     "Settings" : {
       "localizations" : {
@@ -225,6 +248,9 @@
         }
       }
     },
+    "SkipDiary Demo" : {
+
+    },
     "System" : {
       "localizations" : {
         "es" : {
@@ -253,7 +279,21 @@
         }
       }
     },
+    "Title" : {
+
+    },
+    "Version %@ (%@)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Version %1$@ (%2$@)"
+          }
+        }
+      }
+    },
     "Welcome" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {

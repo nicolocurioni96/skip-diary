@@ -19,8 +19,8 @@ public struct SkipDiaryDemoRootView : View {
     public var body: some View {
         ContentView()
             .task {
-                logger.info("Welcome to Skip on \(androidSDK != nil ? "Android" : "Darwin")!")
-                logger.info("Skip app logs are viewable in the Xcode console for iOS; Android logs can be viewed in Studio or using adb logcat")
+                logger.info("Welcome to SkipDiary Demo on \(androidSDK != nil ? "Android" : "Darwin")!")
+                logger.info("SkipDiary Demo app logs are viewable in the Xcode console for iOS; Android logs can be viewed in Studio or using adb logcat")
             }
     }
 }

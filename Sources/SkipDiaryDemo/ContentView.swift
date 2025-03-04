@@ -1,25 +1,18 @@
 import SwiftUI
 
 enum ContentTab: String, Hashable {
-    case welcome, home, settings
+    case home, settings
 }
 
 struct ContentView: View {
-    @AppStorage("tab") var tab = ContentTab.welcome
+    @AppStorage("tab") var tab = ContentTab.home
     @State var viewModel = ViewModel()
     @State var appearance = ""
 
     var body: some View {
         TabView(selection: $tab) {
             NavigationStack {
-                WelcomeView()
-            }
-            .tabItem { Label("Welcome", systemImage: "heart.fill") }
-            .tag(ContentTab.welcome)
-
-            NavigationStack {
-                ItemListView()
-                    .navigationTitle(Text("\(viewModel.items.count) Items"))
+                HomeView()
             }
             .tabItem { Label("Home", systemImage: "house.fill") }
             .tag(ContentTab.home)
@@ -36,22 +29,36 @@ struct ContentView: View {
     }
 }
 
-struct WelcomeView : View {
-    @State var heartBeating = false
+struct HomeView : View {
+    @State var showAddSheet: Bool = false
     @Environment(ViewModel.self) var viewModel: ViewModel
 
     var body: some View {
-        @Bindable var viewModel = viewModel
-        VStack(spacing: 0) {
-            Text("Hello [\(viewModel.name)](https://skip.tools)!")
-                .padding()
-            Image(systemName: "heart.fill")
-                .foregroundStyle(.red)
-                .scaleEffect(heartBeating ? 1.5 : 1.0)
-                .animation(.easeInOut(duration: 1).repeatForever(), value: heartBeating)
-                .onAppear { heartBeating = true }
+        NavigationStack {
+            List {
+                ForEach(viewModel.items) { item in
+                    Label {
+                        Text(item.itemTitle)
+                    } icon: {
+                        if item.favorite {
+                            Image(systemName: "star.fill")
+                                .foregroundStyle(.yellow)
+                        }
+                    }
+                }
+            }
         }
         .font(.largeTitle)
+        .navigationTitle("SkipDiary Demo")
+        .toolbar {
+            ToolbarItemGroup {
+                Button {
+                    
+                } label: {
+                    Label("Add", systemImage: "plus")
+                }
+            }
+        }
     }
 }
 
